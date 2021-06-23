@@ -16,6 +16,7 @@ type User {
 
 type Query {
   todos: [Todo!]!
+  canarios: [Canario!]!
 }
 
 input NewTodo {
@@ -25,4 +26,16 @@ input NewTodo {
 
 type Mutation {
   createTodo(input: NewTodo!): Todo!
+  createCanario(input: NewCanario!): Canario!
+}
+
+type Canario {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+input NewCanario {
+  name: String!
+  email: String!
 }

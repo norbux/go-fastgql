@@ -2,6 +2,17 @@
 
 package model
 
+type Canario struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type NewCanario struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
 type NewTodo struct {
 	Text   string `json:"text"`
 	UserID string `json:"userId"`

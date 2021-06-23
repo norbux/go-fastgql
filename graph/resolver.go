@@ -1,5 +1,7 @@
 package graph
 
+//go:generate go run github.com/arsmn/fastgql
+
 import "github.com/norbux/gqlgen-todos/graph/model"
 
 // This file will not be regenerated automatically.
@@ -8,4 +10,7 @@ import "github.com/norbux/gqlgen-todos/graph/model"
 
 type Resolver struct{
 	todos []*model.Todo
+	canarios []*model.Canario
+	//tipo []*model.Tipo
+	//...
 }

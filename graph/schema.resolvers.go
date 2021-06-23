@@ -8,6 +8,7 @@ import (
 	"math/rand"
 	"strconv"
 
+	"github.com/norbux/gqlgen-todos/db"
 	"github.com/norbux/gqlgen-todos/graph/generated"
 	"github.com/norbux/gqlgen-todos/graph/model"
 )
@@ -15,7 +16,7 @@ import (
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	todo := &model.Todo{
 		Text: input.Text,
-		ID: strconv.Itoa(rand.Int()),
+		ID:   strconv.Itoa(rand.Int()),
 		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
 	}
 
@@ -23,8 +24,26 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return todo, nil
 }
 
+func (r *mutationResolver) CreateCanario(ctx context.Context, input model.NewCanario) (*model.Canario, error) {
+	canario := &model.Canario{
+		ID: strconv.Itoa(rand.Int()),
+		Name: input.Name,
+		Email: input.Email,
+	}
+
+	// r.canarios = append(r.canarios, canario)
+	// return canario, nil
+
+	return db.CreateCanario(canario), nil
+}
+
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
+}
+
+func (r *queryResolver) Canarios(ctx context.Context) ([]*model.Canario, error) {
+	//return r.canarios, nil
+	return db.GetCanarios(), nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
